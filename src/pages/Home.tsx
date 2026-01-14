@@ -93,10 +93,15 @@ export function Home() {
             <p className="text-gray-300 mb-6 text-lg leading-relaxed">
               {t('about.text')}
             </p>
-            <div className="flex items-center gap-2 text-accent font-medium">
-              <MapPin size={20} />
-              <span>Pieter Cornelisz Hooftstraat 78-B, 1071CB Amsterdam</span>
-            </div>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Pieter+Cornelisz+Hooftstraat+78-B,+1071CB+Amsterdam" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 text-accent font-medium hover:text-white transition-colors cursor-pointer group"
+            >
+              <MapPin size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="group-hover:underline">Pieter Cornelisz Hooftstraat 78-B, 1071CB Amsterdam</span>
+            </a>
           </div>
         </div>
       </section>
