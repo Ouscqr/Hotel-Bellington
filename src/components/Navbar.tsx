@@ -72,33 +72,34 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Nav Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/95 backdrop-blur-2xl z-40 flex flex-col items-center justify-center gap-8 md:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden absolute top-full left-0 right-0 bg-[#09090b] border-t border-b border-white/10 overflow-hidden shadow-2xl"
           >
-            <div className="flex flex-col items-center gap-8 w-full px-6">
+            <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className="text-4xl font-heading text-white hover:text-primary-light transition-colors"
+                  className="text-lg font-medium text-white/90 hover:text-primary transition-colors py-2 border-b border-white/5 last:border-0"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
               
-              <div className="h-px w-24 bg-white/10 my-4" />
-
-              <div className="flex flex-col items-center gap-6 w-full max-w-xs">
-                <LanguageSelector mobile />
-                <Button fullWidth size="lg" onClick={() => { setIsOpen(false); handleBookNow(); }}>
+              <div className="pt-2">
+                 <LanguageSelector mobile />
+              </div>
+              
+              <div className="pt-2">
+                <Button fullWidth onClick={() => { setIsOpen(false); handleBookNow(); }}>
                   {t('nav.bookNow')}
                 </Button>
               </div>

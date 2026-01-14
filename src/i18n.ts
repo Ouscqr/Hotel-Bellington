@@ -14,7 +14,7 @@ const resources = {
       
       // Hero
       "hero.title": "Hotel Bellington",
-      "hero.subtitle": "Affordable Comfort in the Heart of P.C. Hooftstraat",
+      "hero.subtitle": "The perfect starting point for culture, leisure, and luxury.",
       "hero.cta": "Book Your Stay",
       
       // Booking Widget
@@ -23,6 +23,7 @@ const resources = {
       "booking.guests": "Guests",
       "booking.guest": "Guest",
       "booking.search": "Check Availability",
+      "booking.bestRates": "Best Rates Guaranteed - Book Direct",
       
       // Location Highlights
       "highlights.title": "The Perfect Location",
@@ -107,6 +108,7 @@ const resources = {
       "booking.guests": "Huéspedes",
       "booking.guest": "Huésped",
       "booking.search": "Verificar Disponibilidad",
+      "booking.bestRates": "Mejor Precio Garantizado - Reserva Directa",
       
       // Location Highlights
       "highlights.title": "La Ubicación Perfecta",

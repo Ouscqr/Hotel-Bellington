@@ -1,5 +1,5 @@
 import { format, differenceInCalendarDays } from 'date-fns';
-import { Search, Calendar as CalendarIcon, X } from 'lucide-react';
+import { Search, Calendar as CalendarIcon, X, CheckCircle } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 // import { useNavigate } from 'react-router-dom'; // Removed unused
 import { useState, useRef, useEffect } from 'react';
@@ -322,6 +322,12 @@ export function BookingWidget() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Best Rates Guarantee */}
+      <div className="flex items-center justify-center gap-2 mt-4 text-white/80 text-sm font-medium animate-fade-in-up">
+        <CheckCircle size={16} className="text-green-400" />
+        <span>{t('booking.bestRates')}</span>
+      </div>
     </div>
   );
 }
