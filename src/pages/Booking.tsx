@@ -7,7 +7,11 @@ export function Booking() {
   const { checkIn, checkOut, guests, selectedRoomId } = useBooking();
   const [step, setStep] = useState<'details' | 'confirm'>('details');
 
-  const nights = differenceInDays(checkOut, checkIn);
+  // Safety hints for building
+  const safeCheckIn = checkIn || new Date();
+  const safeCheckOut = checkOut || new Date();
+
+  const nights = differenceInDays(safeCheckOut, safeCheckIn) || 1; // Default to 1 night if dates valid/same
   // Mock room lookup (in real app, fetch from ID)
   const roomPrice = selectedRoomId === 'penthouse' ? 1200 : selectedRoomId === 'suite' ? 550 : 350;
   const roomName = selectedRoomId === 'penthouse' ? 'Royal Penthouse' : selectedRoomId === 'suite' ? 'Executive Suite' : 'Deluxe King Room';
@@ -49,11 +53,11 @@ export function Booking() {
             </div>
             <div className="flex justify-between">
               <span>Check In:</span>
-              <span className="font-medium text-white">{format(checkIn, 'MMM dd, yyyy')}</span>
+              <span className="font-medium text-white">{format(safeCheckIn, 'MMM dd, yyyy')}</span>
             </div>
             <div className="flex justify-between">
               <span>Check Out:</span>
-              <span className="font-medium text-white">{format(checkOut, 'MMM dd, yyyy')}</span>
+              <span className="font-medium text-white">{format(safeCheckOut, 'MMM dd, yyyy')}</span>
             </div>
             <div className="flex justify-between">
               <span>Guests:</span>

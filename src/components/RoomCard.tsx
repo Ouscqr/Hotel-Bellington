@@ -13,7 +13,7 @@ interface RoomProps {
   capacity: number;
 }
 
-export function RoomCard({ id, name, description, price, image, size, capacity }: RoomProps) {
+export function RoomCard({ name, description, price, image, size, capacity }: RoomProps) {
   const { checkIn, checkOut, guests } = useBooking();
 
   const handleBook = () => {
