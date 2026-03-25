@@ -2,12 +2,17 @@ import { Button } from '../components/Button';
 import { BookingWidget } from '../components/BookingWidget';
 import { Train, Star, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useBooking } from '../context/BookingContext';
+import { getBookingUrl } from '../utils/bookingUtils';
+
 export function Home() {
-  const { t } = useTranslation();
-  // const { checkIn, checkOut, guests } = useBooking(); // Removed unused
+  const { t, i18n } = useTranslation();
+  const { checkIn, checkOut, guests, openBookingModal } = useBooking();
 
   const handleBookNow = () => {
-    window.open('https://bookingengine.mylighthouse.com/hotel-bellington-amsterdam', '_blank');
+    const lang = i18n.language?.split('-')[0] || 'en';
+    const url = getBookingUrl(checkIn, checkOut, guests, lang);
+    openBookingModal(url);
   };
 
   return (

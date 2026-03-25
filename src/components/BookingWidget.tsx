@@ -6,20 +6,19 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DayPicker } from 'react-day-picker';
 import { motion, AnimatePresence } from 'framer-motion';
-import 'react-day-picker/style.css';
-
 import { getBookingUrl } from '../utils/bookingUtils';
 
 export function BookingWidget() {
-  const { checkIn, checkOut, guests, setCheckIn, setCheckOut, setGuests } = useBooking();
+  const { checkIn, checkOut, guests, setCheckIn, setCheckOut, setGuests, openBookingModal } = useBooking();
   // const navigate = useNavigate(); // Removed unused
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState<'checkIn' | 'checkOut' | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleSearch = () => {
-    const url = getBookingUrl(checkIn, checkOut, guests);
-    window.open(url, '_blank');
+    const lang = i18n.language?.split('-')[0] || 'en';
+    const url = getBookingUrl(checkIn, checkOut, guests, lang);
+    openBookingModal(url);
   };
 
   const [isMobile, setIsMobile] = useState(false);

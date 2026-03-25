@@ -6,6 +6,8 @@ interface BookingState {
   checkOut: Date | null;
   guests: number;
   selectedRoomId: string | null;
+  isModalOpen: boolean;
+  modalUrl: string | null;
 }
 
 interface BookingContextType extends BookingState {
@@ -13,6 +15,8 @@ interface BookingContextType extends BookingState {
   setCheckOut: (date: Date | null) => void;
   setGuests: (count: number) => void;
   setSelectedRoomId: (id: string | null) => void;
+  openBookingModal: (url: string) => void;
+  closeBookingModal: () => void;
 }
 
 const BookingContext = createContext<BookingContextType | undefined>(undefined);
@@ -22,6 +26,19 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [guests, setGuests] = useState<number>(2);
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalUrl, setModalUrl] = useState<string | null>(null);
+
+  const openBookingModal = (url: string) => {
+    setModalUrl(url);
+    setIsModalOpen(true);
+  };
+
+  const closeBookingModal = () => {
+    setIsModalOpen(false);
+    // Optional: delay clearing url to allow exit animation
+    setTimeout(() => setModalUrl(null), 300);
+  };
 
   return (
     <BookingContext.Provider
@@ -30,10 +47,14 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         checkOut,
         guests,
         selectedRoomId,
+        isModalOpen,
+        modalUrl,
         setCheckIn,
         setCheckOut,
         setGuests,
         setSelectedRoomId,
+        openBookingModal,
+        closeBookingModal,
       }}
     >
       {children}

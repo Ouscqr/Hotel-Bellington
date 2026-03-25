@@ -8,13 +8,19 @@ import { useTranslation } from 'react-i18next';
 import { LanguageSelector } from './LanguageSelector';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { useBooking } from '../context/BookingContext';
+import { getBookingUrl } from '../utils/bookingUtils';
+
 export function Navbar() {
   const scrolled = useScroll(20);
   const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { checkIn, checkOut, guests, openBookingModal } = useBooking();
 
   const handleBookNow = () => {
-    window.open('https://bookingengine.mylighthouse.com/hotel-bellington-amsterdam', '_blank');
+    const lang = i18n.language?.split('-')[0] || 'en';
+    const url = getBookingUrl(checkIn, checkOut, guests, lang);
+    openBookingModal(url);
   };
 
   const navLinks = [
@@ -25,7 +31,7 @@ export function Navbar() {
   return (
     <nav
       className={clsx(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'absolute top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled || isOpen ? 'bg-[#09090b]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent py-6'
       )}
     >

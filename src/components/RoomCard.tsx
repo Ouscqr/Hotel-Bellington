@@ -2,6 +2,7 @@ import { Users, Wifi, Coffee, Maximize } from 'lucide-react';
 import { Button } from './Button';
 import { useBooking } from '../context/BookingContext';
 import { getBookingUrl } from '../utils/bookingUtils';
+import { useTranslation } from 'react-i18next';
 
 interface RoomProps {
   id: string;
@@ -14,11 +15,13 @@ interface RoomProps {
 }
 
 export function RoomCard({ name, description, price, image, size, capacity }: RoomProps) {
-  const { checkIn, checkOut, guests } = useBooking();
+  const { t, i18n } = useTranslation();
+  const { checkIn, checkOut, guests, openBookingModal } = useBooking();
 
   const handleBook = () => {
-    const url = getBookingUrl(checkIn, checkOut, guests);
-    window.open(url, '_blank');
+    const lang = i18n.language?.split('-')[0] || 'en';
+    const url = getBookingUrl(checkIn, checkOut, guests, lang);
+    openBookingModal(url);
   };
 
   return (
