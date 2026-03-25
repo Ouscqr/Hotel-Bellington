@@ -15,7 +15,7 @@ interface RoomProps {
 }
 
 export function RoomCard({ name, description, price, image, size, capacity }: RoomProps) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { checkIn, checkOut, guests, openBookingModal } = useBooking();
 
   const handleBook = () => {

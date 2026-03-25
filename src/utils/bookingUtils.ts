@@ -1,7 +1,8 @@
 import { format, addDays } from 'date-fns';
 
-export function getBookingUrl(checkIn: Date | null, checkOut: Date | null, _guests: number): string {
-  const baseUrl = "https://bookingengine.mylighthouse.com/hotel-bellington-amsterdam";
+export function getBookingUrl(checkIn: Date | null, checkOut: Date | null, _guests: number, lang: string = 'en'): string {
+  // Using the FastBooker endpoint you provided
+  const baseUrl = "https://bookingengine.mylighthouse.com/5531/Rooms/Select";
   
   // Default to today if no date selected
   const start = checkIn || new Date();
@@ -12,9 +13,9 @@ export function getBookingUrl(checkIn: Date | null, checkOut: Date | null, _gues
     end = addDays(start, 1);
   }
 
-  // Format: yyyy-M-d (e.g., 2026-1-15) as requested
+  // Format: yyyy-M-d (e.g., 2026-1-15) exactly as the FastBooker script does:
   const arrival = format(start, 'yyyy-M-d');
   const departure = format(end, 'yyyy-M-d');
 
-  return `${baseUrl}?Arrival=${arrival}&Departure=${departure}&Room=&Rate=&Package=&DiscountCode=`;
+  return `${baseUrl}?lang=${lang}&Arrival=${arrival}&Departure=${departure}`;
 }
